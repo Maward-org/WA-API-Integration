@@ -6,21 +6,39 @@ from frappe.model.document import Document
 
 
 class WAAccount(Document):
-	@frappe.whitelist()
-	def trigger_webhook(self):
-		# pass
-		# frappe.db.set_value(self.doctype, self.name, 'get_qr', 1, update_modified=False)
-		# frappe.db.set_value(self.doctype, self.name, 'qr_updated', 0, update_modified=False)
-		# doc = frappe.get_doc("WA QR Details", self.name)
-		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
+	
+	@property
+	def status(self):
+		status = frappe.get_value("WA QR Details", {"wa_account": self.name}, "status")
+		return status or ""
 
 
-
+	def validate(self):
+		if self.is_new():
+			wa_details = frappe.get_doc({
+			'doctype': 'WA QR Details',
+			'wa_account': self.name,  
+			
+				})
 		
+			wa_details.insert()
+			frappe.msgprint(f"Created WA QR Details for {self.name}")
+
+		frappe.db.set_value("WA QR Details", {"wa_account": self.name}, "domain", self.domain)
+
+	@frappe.whitelist()
+	def trigger_login_webhook(self):
+		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
 		doc.get_qr = 1
 		doc.qr_updated = 0
-		doc.save()  # Ignores version conflicts
-		# frappe.db.commit()
+		doc.save() 
+
+	@frappe.whitelist()
+	def trigger_logout_webhook(self):
+	
+		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
+		doc.logout = 1
+		doc.save() 
 
 
 	

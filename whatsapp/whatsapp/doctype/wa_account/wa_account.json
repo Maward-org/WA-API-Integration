@@ -1,32 +1,41 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:WA-ACC-{###}",
  "creation": "2025-02-16 13:16:41.277044",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "domain",
   "device_id",
   "status"
  ],
  "fields": [
   {
    "fieldname": "status",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
+   "is_virtual": 1,
    "label": "Status",
-   "options": "Disconnected\nConnected"
+   "read_only": 1
   },
   {
    "fieldname": "device_id",
    "fieldtype": "Data",
    "label": "Device ID"
+  },
+  {
+   "fieldname": "domain",
+   "fieldtype": "Data",
+   "label": "Domain"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-24 16:42:41.927499",
+ "modified": "2025-02-25 12:13:37.168279",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Account",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

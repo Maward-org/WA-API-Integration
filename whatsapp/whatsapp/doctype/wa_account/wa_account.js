@@ -194,123 +194,195 @@
 
 frappe.ui.form.on('WA Account', {
     refresh: function(frm) {
-        frm.add_custom_button('Get QR Code', function() {
+        toggle_btn(frm)
+
+       
+
+},
+    status:function(frm){
+        toggle_btn(frm)
+
+    },
+
+
+
+});
+
+function toggle_btn(frm) {
+    
+
+
+    // // frm.disable_("Logout");
+    // if (!frm.is_new() ) {
+        
+    // }
+    // else if(!frm.is_new() && frm.doc.status=="Connected"){ 
+    //     frm.add_custom_button('Logout', function() {
           
            
 
-            frappe.call({
-                method: "trigger_webhook",
-                doc:frm.doc,
-               
-                callback: function(response) {
-                    // frm.refresh_field("last_qr");
-                    // frm.refresh_field("get_qr");
-                    // frm.refresh_field("qr_updated");
+          
+          
+        
+        
+    //     }).addClass('btn-primary');
 
-                    // let qr_link = response.message.qr_link;
-                    console.log("webhook triggered")
-                    //show dailog
-                    let d = new frappe.ui.Dialog({
-                        title: 'Scan WhatsApp QR Code',
-                        fields: [
-                            {
-                                fieldname: 'qr_code_html',
-                                fieldtype: 'HTML',
-                                options: `<div style="text-align:center;">
-                                   
-                                    <p>Waiting for QR code...</p>
-                                </div>`
-                            }
-                        ],
-                        primary_action_label: 'Done',
-                        primary_action: function() {
-                            d.hide();
+    // }
+
+    // frm.page.clear_primary_action();
+        frm.page.clear_secondary_action();
+        frm.page.clear_inner_toolbar();
+
+        if (!frm.is_new()) { 
+            if (frm.doc.status == "Connected") { 
+                frm.add_custom_button('Logout', function() {
+                   
+                    frappe.call({
+                        method: "trigger_logout_webhook",
+                        doc:frm.doc,
+                       
+                        callback: function(response) {
+                            // frm.refresh_field("last_qr");
+                            // frm.refresh_field("get_qr");
+                            // frm.refresh_field("qr_updated");
+        
+                            // let qr_link = response.message.qr_link;
+                            console.log("webhook triggered")
+                            //show dailog
+                            
+                        
+                          
+                            
                         }
                     });
-                
-                    d.show();
-                    function fetchQRCode(retries = 5, delay = 2000) {
-                        console.log("fetchQRCode")
-                        if (retries <= 0) {
-                            frappe.msgprint("QR Code update timeout. Please try again.");
-                            return;
-                        }
-                
+                    
+                }).addClass('btn-success');
+            } else if (frm.doc.status == "Disconnected") { 
+                frm.add_custom_button('Login', function() {
+
+
+          
+           
+
                         frappe.call({
-                            method: "get_latest_qr",
+                            method: "trigger_login_webhook",
                             doc:frm.doc,
                            
                             callback: function(response) {
-                                let qr_link = response.message.qr_link;
-                                console.log("response.message.qr_link"+qr_link)
-        
-                                frm.refresh_field("last_qr");
-                                frm.refresh_field("get_qr");
-                                frm.refresh_field("qr_updated");
-                                if (qr_link) {
-                                    // Update the QR code in the dialog
-                                    d.fields_dict.qr_code_html.$wrapper.html(`
-                                        <div style="text-align:center;">
-                                            <img id="qr_image" src="${qr_link}" alt="WhatsApp QR Code"
-                                            style="max-width: 300px; border: 1px solid #ddd; padding: 10px;"/>
-                                            <p>Scan this QR code to link your WhatsApp account.</p>
-                                            <p>Refresh the code every 30 seconds</p>
-                                        </div>
-                                    `);
-                                } else {
-                                    // Keep polling every 2 seconds
-                                    setTimeout(() => fetchQRCode(retries - 1, delay), delay);
+                                // frm.refresh_field("last_qr");
+                                // frm.refresh_field("get_qr");
+                                // frm.refresh_field("qr_updated");
+            
+                                // let qr_link = response.message.qr_link;
+                                console.log("webhook triggered")
+                                //show dailog
+                                let d = new frappe.ui.Dialog({
+                                    title: 'Scan WhatsApp QR Code',
+                                    fields: [
+                                        {
+                                            fieldname: 'qr_code_html',
+                                            fieldtype: 'HTML',
+                                            options: `<div style="text-align:center;">
+                                               
+                                                <p>Waiting for QR code...</p>
+                                            </div>`
+                                        }
+                                    ],
+                                    primary_action_label: 'Done',
+                                    primary_action: function() {
+                                        d.hide();
+                                    }
+                                });
+                            
+                                d.show();
+                                function fetchQRCode(retries = 5, delay = 2000) {
+                                    console.log("fetchQRCode")
+                                    if (retries <= 0) {
+                                        frappe.msgprint("QR Code update timeout. Please try again.");
+                                        return;
+                                    }
+                            
+                                    frappe.call({
+                                        method: "get_latest_qr",
+                                        doc:frm.doc,
+                                       
+                                        callback: function(response) {
+                                            let qr_link = response.message.qr_link;
+                                            console.log("response.message.qr_link"+qr_link)
+                    
+                                            frm.refresh_field("last_qr");
+                                            frm.refresh_field("get_qr");
+                                            frm.refresh_field("qr_updated");
+                                            if (qr_link) {
+                                                // Update the QR code in the dialog
+                                                d.fields_dict.qr_code_html.$wrapper.html(`
+                                                    <div style="text-align:center;">
+                                                        <img id="qr_image" src="${qr_link}" alt="WhatsApp QR Code"
+                                                        style="max-width: 300px; border: 1px solid #ddd; padding: 10px;"/>
+                                                        <p>Scan this QR code to link your WhatsApp account.</p>
+                                                        <p>Refresh the code every 30 seconds</p>
+                                                    </div>
+                                                `);
+                                            } else {
+                                                // Keep polling every 2 seconds
+                                                setTimeout(() => fetchQRCode(retries - 1, delay), delay);
+                                            }
+                                        }
+                                    });
                                 }
+                            
+                                fetchQRCode(); // Start polling for QR update
+            
+                                
                             }
                         });
-                    }
-                
-                    fetchQRCode(); // Start polling for QR update
+                        
+                      
+                    
+                        function fetchQRCode(retries = 5, delay = 2000) {
+                            console.log("fetchQRCode")
+                            if (retries <= 0) {
+                                frappe.msgprint("QR Code update timeout. Please try again.");
+                                return;
+                            }
+                    
+                            frappe.call({
+                                method: "get_latest_qr",
+                                doc:frm.doc,
+                               
+                                callback: function(response) {
+                                    let qr_link = response.message.qr_link;
+                                    console.log("response.message.qr_link"+qr_link)
+            
+                                    frm.refresh_field("last_qr");
+                                    frm.refresh_field("get_qr");
+                                    frm.refresh_field("qr_updated");
+                                    if (qr_link) {
+                                        // Update the QR code in the dialog
+                                        d.fields_dict.qr_code_html.$wrapper.html(`
+                                            <div style="text-align:center;">
+                                                <img id="qr_image" src="${qr_link}" alt="WhatsApp QR Code"
+                                                style="max-width: 300px; border: 1px solid #ddd; padding: 10px;"/>
+                                                <p>Scan this QR code to link your WhatsApp account.</p>
+                                            </div>
+                                        `);
+                                    } else {
+                                        // Keep polling every 2 seconds
+                                        setTimeout(() => fetchQRCode(retries - 1, delay), delay);
+                                    }
+                                }
+                            });
+                        }
+                    
+               
+                    
+
 
                     
-                }
-            });
-            
-          
-        
-            function fetchQRCode(retries = 5, delay = 2000) {
-                console.log("fetchQRCode")
-                if (retries <= 0) {
-                    frappe.msgprint("QR Code update timeout. Please try again.");
-                    return;
-                }
-        
-                frappe.call({
-                    method: "get_latest_qr",
-                    doc:frm.doc,
-                   
-                    callback: function(response) {
-                        let qr_link = response.message.qr_link;
-                        console.log("response.message.qr_link"+qr_link)
-
-                        frm.refresh_field("last_qr");
-                        frm.refresh_field("get_qr");
-                        frm.refresh_field("qr_updated");
-                        if (qr_link) {
-                            // Update the QR code in the dialog
-                            d.fields_dict.qr_code_html.$wrapper.html(`
-                                <div style="text-align:center;">
-                                    <img id="qr_image" src="${qr_link}" alt="WhatsApp QR Code"
-                                    style="max-width: 300px; border: 1px solid #ddd; padding: 10px;"/>
-                                    <p>Scan this QR code to link your WhatsApp account.</p>
-                                </div>
-                            `);
-                        } else {
-                            // Keep polling every 2 seconds
-                            setTimeout(() => fetchQRCode(retries - 1, delay), delay);
-                        }
-                    }
-                });
+                }).addClass('btn-success');
             }
-        
-           // Start polling for QR update
-        }).addClass('btn-primary');
-        
-    }
-});
+        }
+
+
+}
 

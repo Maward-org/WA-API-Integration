@@ -8,12 +8,16 @@
   "wa_account",
   "url",
   "get_qr",
-  "qr_updated"
+  "qr_updated",
+  "logout",
+  "status",
+  "domain",
+  "main_domain"
  ],
  "fields": [
   {
    "fieldname": "wa_account",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "WA Account",
    "options": "WA Account"
   },
@@ -33,11 +37,34 @@
    "fieldname": "url",
    "fieldtype": "Small Text",
    "label": "URL"
+  },
+  {
+   "default": "0",
+   "fieldname": "logout",
+   "fieldtype": "Check",
+   "label": "Logout"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Disconnected\nConnected"
+  },
+  {
+   "fieldname": "domain",
+   "fieldtype": "Data",
+   "label": "WA Domain",
+   "read_only": 1
+  },
+  {
+   "fieldname": "main_domain",
+   "fieldtype": "Data",
+   "label": "Main Domain"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-24 17:04:40.024366",
+ "modified": "2025-02-25 13:08:14.607285",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA QR Details",
