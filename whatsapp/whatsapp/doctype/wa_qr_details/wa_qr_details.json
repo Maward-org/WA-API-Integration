@@ -8,11 +8,14 @@
   "wa_account",
   "url",
   "get_qr",
+  "get_code",
   "qr_updated",
   "logout",
   "status",
   "domain",
-  "main_domain"
+  "main_domain",
+  "phone_number",
+  "code"
  ],
  "fields": [
   {
@@ -60,11 +63,28 @@
    "fieldname": "main_domain",
    "fieldtype": "Data",
    "label": "Main Domain"
+  },
+  {
+   "default": "0",
+   "fieldname": "get_code",
+   "fieldtype": "Check",
+   "label": "Get Code"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-25 13:08:14.607285",
+ "modified": "2025-03-01 22:27:20.246359",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA QR Details",
