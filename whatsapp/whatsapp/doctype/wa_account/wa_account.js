@@ -3,6 +3,7 @@
 frappe.ui.form.on('WA Account', {
     refresh: function(frm) {
         toggle_btn(frm)
+        update_status(frm)
 
        
 
@@ -82,6 +83,7 @@ function toggle_btn(frm) {
                                     primary_action_label: 'Done',
                                     primary_action: function() {
                                         d.hide();
+                                        update_status(frm)
                                     }
                                 });
                             
@@ -162,6 +164,10 @@ function toggle_btn(frm) {
                             }
                         ],
                         primary_action_label: 'Done',
+                        primary_action: function() {
+                            d.hide();
+                            update_status(frm)
+                        },
                         secondary_action_label: 'Get Code',
                         secondary_action: function() {
                             let values = d.get_values();
@@ -296,4 +302,12 @@ function toggle_btn(frm) {
 
 
 }
+function update_status(frm){
+    frappe.call({
+        method: "update_status",
+        doc:frm.doc,
+        
+       
+        
 
+    })}

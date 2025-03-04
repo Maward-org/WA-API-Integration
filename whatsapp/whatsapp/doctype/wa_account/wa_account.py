@@ -100,6 +100,20 @@ class WAAccount(Document):
 		else:
 			return {"code": None}
 		
+
+	@frappe.whitelist()
+	def update_status(self):
+		
+		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
+
+		doc.status_updated=0
+		doc.save()
+		doc.status_updated=1
+		doc.save()
+			
+	
+		
+		
 	
 
 	# @frappe.whitelist()
