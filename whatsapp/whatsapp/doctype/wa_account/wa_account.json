@@ -8,7 +8,8 @@
  "field_order": [
   "domain",
   "device_id",
-  "status"
+  "status",
+  "phone_number"
  ],
  "fields": [
   {
@@ -27,11 +28,18 @@
    "fieldname": "domain",
    "fieldtype": "Data",
    "label": "Domain"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "is_virtual": 1,
+   "label": "Phone Number",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-25 12:13:37.168279",
+ "modified": "2025-03-05 00:45:03.391636",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Account",

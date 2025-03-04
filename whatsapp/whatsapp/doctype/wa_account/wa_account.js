@@ -303,7 +303,7 @@ function toggle_btn(frm) {
 
 }
 function update_status(frm){
-    frappe.call({
+    frappe.call({   
         method: "update_status",
         doc:frm.doc,
         

@@ -13,6 +13,11 @@ class WAAccount(Document):
 	def status(self):
 		status = frappe.get_value("WA QR Details", {"wa_account": self.name}, "status")
 		return status or ""
+	
+	@property
+	def phone_number(self):
+		num = frappe.get_value("WA QR Details", {"wa_account": self.name}, "phone_number")
+		return num or ""
 
 
 	def validate(self):

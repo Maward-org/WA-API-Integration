@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-05 00:56:53.504323",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sender",
+  "sender_phone",
+  "receiver_id",
+  "status",
+  "column_break_qeeo",
+  "send_date",
+  "type",
+  "wa_message_id",
+  "section_break_bvup",
+  "content",
+  "section_break_nwtw",
+  "ref_doctype",
+  "file_type",
+  "is_media",
+  "is_document",
+  "is_link",
+  "is_voice_clip",
+  "is_mention",
+  "is_screenshot",
+  "column_break_xcgt",
+  "ref_document"
+ ],
+ "fields": [
+  {
+   "fieldname": "sender",
+   "fieldtype": "Link",
+   "label": "Sender",
+   "options": "WA Account"
+  },
+  {
+   "fieldname": "sender_phone",
+   "fieldtype": "Data",
+   "label": "Sender ID"
+  },
+  {
+   "fieldname": "column_break_qeeo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "send_date",
+   "fieldtype": "Datetime",
+   "label": "Send Date"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nSet Admin\nSet Avatar"
+  },
+  {
+   "fieldname": "wa_message_id",
+   "fieldtype": "Data",
+   "label": "WA Message ID"
+  },
+  {
+   "fieldname": "section_break_bvup",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Long Text",
+   "label": "Content"
+  },
+  {
+   "fieldname": "receiver_id",
+   "fieldtype": "Data",
+   "label": "Receiver ID"
+  },
+  {
+   "fieldname": "section_break_nwtw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
+   "label": "Ref Doctype",
+   "options": "DocType"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_media",
+   "fieldtype": "Check",
+   "label": "Is Media"
+  },
+  {
+   "depends_on": "is_media",
+   "fieldname": "file_type",
+   "fieldtype": "Select",
+   "label": "File Type",
+   "options": "\nImage\nAudio\nFile\nVideo\nContact"
+  },
+  {
+   "fieldname": "column_break_xcgt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ref_document",
+   "fieldtype": "Dynamic Link",
+   "label": "Ref Document",
+   "options": "ref_doctype"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_document",
+   "fieldtype": "Check",
+   "label": "Is Document"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_link",
+   "fieldtype": "Check",
+   "label": "Is Link"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_voice_clip",
+   "fieldtype": "Check",
+   "label": "Is Voice Clip"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_mention",
+   "fieldtype": "Check",
+   "label": "Is Mention"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_screenshot",
+   "fieldtype": "Check",
+   "label": "Is Screenshot"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nSent\nFailed"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-05 02:29:10.607988",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "WA Logs",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -8,22 +8,24 @@
   "enable",
   "doctype_ref",
   "column_break_chkd",
-  "send_messsage",
-  "send_image",
-  "send_file",
+  "sending_account",
+  "type",
   "message_details_section",
-  "message_field",
   "message_content",
-  "image_details_section",
-  "image_field",
-  "image_caption",
-  "column_break_musu",
+  "section_break_rkwn",
+  "file_type",
+  "is_media",
+  "is_document",
+  "is_link",
+  "is_voice_clip",
+  "is_mention",
+  "is_screenshot",
+  "column_break_qtfl",
+  "file_field",
   "view_once",
   "compress",
-  "file_details_section",
-  "file_field",
-  "file_caption",
-  "column_break_tezw"
+  "section_break_gvbm",
+  "condition"
  ],
  "fields": [
   {
@@ -39,32 +41,8 @@
    "options": "DocType"
   },
   {
-   "default": "0",
-   "fieldname": "send_messsage",
-   "fieldtype": "Check",
-   "label": "Send Messsage"
-  },
-  {
-   "default": "0",
-   "fieldname": "send_image",
-   "fieldtype": "Check",
-   "label": "Send Image"
-  },
-  {
-   "default": "0",
-   "fieldname": "send_file",
-   "fieldtype": "Check",
-   "label": "Send File"
-  },
-  {
    "fieldname": "message_details_section",
-   "fieldtype": "Section Break",
-   "label": "Message Details"
-  },
-  {
-   "fieldname": "message_field",
-   "fieldtype": "Select",
-   "label": "Message Field"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "message_content",
@@ -72,29 +50,9 @@
    "label": "Message Content"
   },
   {
-   "fieldname": "image_details_section",
-   "fieldtype": "Section Break",
-   "label": "Image Details"
-  },
-  {
-   "fieldname": "image_field",
-   "fieldtype": "Select",
-   "label": "Image Field"
-  },
-  {
-   "fieldname": "file_details_section",
-   "fieldtype": "Section Break",
-   "label": "File Details"
-  },
-  {
    "fieldname": "file_field",
    "fieldtype": "Select",
    "label": "File Field"
-  },
-  {
-   "fieldname": "image_caption",
-   "fieldtype": "Small Text",
-   "label": "Image Caption"
   },
   {
    "default": "0",
@@ -109,26 +67,84 @@
    "label": "Compress "
   },
   {
-   "fieldname": "file_caption",
-   "fieldtype": "Small Text",
-   "label": "File Caption"
-  },
-  {
    "fieldname": "column_break_chkd",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_musu",
+   "fieldname": "sending_account",
+   "fieldtype": "Link",
+   "label": "Sending Account",
+   "options": "WA Account"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nSet Admin\nSet Avatar"
+  },
+  {
+   "fieldname": "section_break_rkwn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "file_type",
+   "fieldtype": "Select",
+   "label": "File Type",
+   "options": "\nImage\nAudio\nFile\nVideo\nContact"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_media",
+   "fieldtype": "Check",
+   "label": "Is Media"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_document",
+   "fieldtype": "Check",
+   "label": "Is Document"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_link",
+   "fieldtype": "Check",
+   "label": "Is Link"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_voice_clip",
+   "fieldtype": "Check",
+   "label": "Is Voice Clip"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_mention",
+   "fieldtype": "Check",
+   "label": "Is Mention"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_screenshot",
+   "fieldtype": "Check",
+   "label": "Is Screenshot"
+  },
+  {
+   "fieldname": "column_break_qtfl",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_tezw",
-   "fieldtype": "Column Break"
+   "fieldname": "section_break_gvbm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Code",
+   "label": "Condition"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-22 11:58:39.372208",
+ "modified": "2025-03-05 02:26:14.062009",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Message Template",
