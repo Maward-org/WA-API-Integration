@@ -9,15 +9,15 @@ from frappe.utils import validate_phone_number_with_country_code
 
 class WAAccount(Document):
 	
-	@property
-	def status(self):
-		status = frappe.get_value("WA QR Details", {"wa_account": self.name}, "status")
-		return status or ""
+	# @property
+	# def status(self):
+	# 	status = frappe.get_value("WA QR Details", {"wa_account": self.name}, "status")
+	# 	return status or ""
 	
-	@property
-	def phone_number(self):
-		num = frappe.get_value("WA QR Details", {"wa_account": self.name}, "phone_number")
-		return num or ""
+	# @property
+	# def phone_number(self):
+	# 	num = frappe.get_value("WA QR Details", {"wa_account": self.name}, "phone_number")
+	# 	return num or ""
 
 
 	def validate(self):
@@ -41,13 +41,27 @@ class WAAccount(Document):
 		doc.save() 
 
 	@frappe.whitelist()
-	def trigger_login_code_webhook(self,phone):
-		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
-		doc.get_code = 1
-		# doc.qr_updated = 0
-		frappe.msgprint(phone)
-		doc.phone_number=phone
-		doc.save() 
+	def create_account_log(self,type,phone=None):
+			
+		doc=frappe.get_doc({
+			"doctype": "WA Log",
+			 
+			
+			
+			"type": type,
+			"ref_doctype": self.doctype,
+			"ref_document": self.name,
+			"status": "Queued",
+			"sender":self.name,
+			"phone_number":phone
+		}).insert()
+		# return {"message": "Log entry created"}
+
+
+		
+		
+
+		
 
 	@frappe.whitelist()
 	def trigger_logout_webhook(self):
@@ -80,41 +94,39 @@ class WAAccount(Document):
 			return {"qr_link": doc.url}
 		else:
 			return {"qr_link": None}
-		
-
-	@frappe.whitelist()
+	@frappe.whitelist()	
 	def get_latest_code(self):
 		"""Fetch latest  code if updated, else return loading state."""
-		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
-		# qr_updated=frappe.db.get_value(self.doctype, self.name, 'qr_updated')
-		# frappe.msgprint(f"qr_updated: {qr_updated}")
+		latest_log = frappe.get_list(
+        "WA Log",
+        filters={"sender": self.name},
+        fields=["name", "status","last_code", "timestamp"], 
+        order_by="creation DESC",
+        limit_page_length=1
+    	)
+		
+	
 		
 
-		if doc.qr_updated:
+		if latest_log[0]:
+			return {"code": latest_log[0].last_code} if latest_log[0].status=="Sent" else {"code": None}
+
+				
+		return {"code": None}
 			
-			# frappe.msgprint(f"qr_updated: {doc.qr_updated}")
-			# frappe.msgprint(f"qr_link: {doc.last_qr}")
-			# self.get_qr = 0
-			# self.qr_updated = 1
-			# self.save(ignore_version=True)
-			# last_qr=frappe.db.get_value(self.doctype, self.name, 'last_qr')
-			doc.qr_updated=0
-			doc.save()
-			trimmed_code = doc.code.replace("-", "")
-			return {"code": trimmed_code}
-		else:
-			return {"code": None}
+			
+		
 		
 
-	@frappe.whitelist()
-	def update_status(self):
+	
 		
-		doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
+		
+		# doc = frappe.get_doc("WA QR Details", {"wa_account": self.name})
 
-		doc.status_updated=0
-		doc.save()
-		doc.status_updated=1
-		doc.save()
+		# doc.status_updated=0
+		# doc.save()
+		# doc.status_updated=1
+		# doc.save()
 			
 	
 		

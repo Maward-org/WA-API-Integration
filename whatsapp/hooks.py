@@ -137,13 +137,25 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"*": {
+		# "on_update": "method",
+		# "on_cancel": "method",
+		# "on_trash": "method",
+        "on_change": [
+			"whatsapp.whatsapp.log_gen.apply",
+			
+		],
+        
+	},
+   
+    # "WA Channel": {
+    #     "on_update": "whatsapp.whatsapp.wa_channel.wa_channel.create_log"
+    # }
+}
+
+    
+
 
 # Scheduled Tasks
 # ---------------

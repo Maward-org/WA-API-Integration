@@ -4,6 +4,12 @@ frappe.ui.form.on('WA Account', {
     refresh: function(frm) {
         toggle_btn(frm)
         update_status(frm)
+        if (frm.doc.domain) { 
+            frm.add_custom_button('Refresh Status', function() {
+                update_status(frm)
+
+            } )  
+            }
 
        
 
@@ -30,25 +36,29 @@ function toggle_btn(frm) {
                 frm.add_custom_button('Logout', function() {
                    
                     frappe.call({
-                        method: "trigger_logout_webhook",
+                        method: "create_account_log",
                         doc:frm.doc,
+                        args:{
+                              
+                            type:"Logout"
+                        },
                        
-                        callback: function(response) {
-                            // frm.refresh_field("last_qr");
-                            // frm.refresh_field("get_qr");
-                            // frm.refresh_field("qr_updated");
-        
-                            // let qr_link = response.message.qr_link;
-                            console.log("webhook triggered")
-                            //show dailog
-                            
                         
-                          
-                            
-                        }
                     });
                     
                 }).addClass('btn-success');
+                frm.add_custom_button('Sync Groups', function(){
+                    
+                    frappe.call({
+                        method: "create_account_log",
+                        doc:frm.doc,
+                        args:{
+                              
+                            type:"Sync Groups"
+                        },
+                        })
+                    
+            })
             } else if (frm.doc.status == "Disconnected") { 
                 frm.add_custom_button('Get QR', function() {
 
@@ -57,8 +67,12 @@ function toggle_btn(frm) {
            
 
                         frappe.call({
-                            method: "trigger_login_webhook",
+                            method: "create_account_log",
                             doc:frm.doc,
+                            args:{
+                              
+                                type:"Login QR"
+                            },
                            
                             callback: function(response) {
                                 // frm.refresh_field("last_qr");
@@ -88,7 +102,7 @@ function toggle_btn(frm) {
                                 });
                             
                                 d.show();
-                                function fetchQRCode(retries = 5, delay = 2000) {
+                                function fetchQRCode(retries = 10, delay = 2000) {
                                     console.log("fetchQRCode")
                                     if (retries <= 0) {
                                         frappe.msgprint("QR Code update timeout. Please try again.");
@@ -96,11 +110,11 @@ function toggle_btn(frm) {
                                     }
                             
                                     frappe.call({
-                                        method: "get_latest_qr",
+                                        method: "get_latest_code",
                                         doc:frm.doc,
                                        
                                         callback: function(response) {
-                                            let qr_link = response.message.qr_link;
+                                            let qr_link = response.message.code;
                                             console.log("response.message.qr_link"+qr_link)
                     
                                             frm.refresh_field("last_qr");
@@ -155,7 +169,7 @@ function toggle_btn(frm) {
                                 fieldname: 'code_html',
                                 fieldtype: 'HTML',
                                 options: `<div style="text-align:center; font-family: Arial, sans-serif; padding: 20px;">
-                                    <p style="color: #333;"> Waiting for QR code...</p>
+                                    <p style="color: #333;"> Waiting for code...</p>
                                     
                                   
                                     
@@ -178,14 +192,15 @@ function toggle_btn(frm) {
                             // frappe.msgprint(__('Code Sent!'));
                             console.log(values.phone_number)
                             frappe.call({
-                                method: "trigger_login_code_webhook",
+                                method: "create_account_log",
                                 doc:frm.doc,
                                 args:{
-                                    phone:values.phone_number
+                                    phone:values.phone_number,
+                                    type:"Login Code"
                                 },
                                
                                 callback: function(response) {
-                                    function fetchCode(retries = 5, delay = 2000) {
+                                    function fetchCode(retries = 10, delay = 2000) {
                                         console.log("fetchCode")
                                         if (retries <= 0) {
                                             frappe.msgprint("Code fetch timeout. Please try again.");
@@ -202,7 +217,6 @@ function toggle_btn(frm) {
                         
                                                 
                                                 if (code) {
-                                                    // Update the QR code in the dialog
                                                     d.fields_dict.code_html.$wrapper.html(`<div style="text-align:center; font-family: Arial, sans-serif; padding: 20px;">
                                                         <h3 style="color: #333;">Enter the Code</h3>
                                                         <p style="color: #777;">Go to Linked Devices \u279C Link with Phone Number Instead </p>
@@ -234,11 +248,12 @@ function toggle_btn(frm) {
                                                             }
                                                         </style>
                                                     </div>`);
-                                                 
+                                                    var cleanedCode = code.replace(/-/g, "");
 
-                                                    for (let i = 0; i < code.length && i < 8; i++) {
+
+                                                    for (let i = 0; i < cleanedCode.length && i < 8; i++) {
                                                         
-                                                        document.getElementById(`code${i + 1}`).value = code[i];
+                                                        document.getElementById(`code${i + 1}`).value = cleanedCode[i];
                                                     }
                                                 } else {
                                                     // Keep polling every 2 seconds
@@ -303,11 +318,27 @@ function toggle_btn(frm) {
 
 }
 function update_status(frm){
-    frappe.call({   
-        method: "update_status",
-        doc:frm.doc,
-        
-       
-        
+    console.log("btn")
 
-    })}
+    if (!frm.is_new()) { 
+    frappe.call({   
+        method: "create_account_log",
+        doc:frm.doc,
+        args:{
+              
+            type:"Update Account Status"
+        },
+            
+        
+        callback: function(response) {
+            // console.log(response.message)
+            // setTimeout(function() {
+            //     frm.refresh_field("status");
+            // }, 3000); // 3000 milliseconds = 3 seconds
+
+
+    
+    
+    }
+    },
+    )}}

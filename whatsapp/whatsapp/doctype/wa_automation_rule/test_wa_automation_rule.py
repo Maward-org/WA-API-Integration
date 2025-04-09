@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestWAMessageTemplate(FrappeTestCase):
+class TestWAAutomationRule(FrappeTestCase):
 	pass

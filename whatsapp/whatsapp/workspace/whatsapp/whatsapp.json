@@ -1,0 +1,106 @@
+{
+ "charts": [
+  {
+   "chart_name": "WhatsApp Message Status Trend",
+   "label": "WhatsApp Log Trend"
+  }
+ ],
+ "content": "[{\"id\":\"kJvQ8Nk2kX\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Whatsapp</span>\",\"col\":12}},{\"id\":\"BiE6Asp1mC\",\"type\":\"chart\",\"data\":{\"chart_name\":\"WhatsApp Log Trend\",\"col\":12}},{\"id\":\"bOpUd4QXgg\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"bsVynSI9ix\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Connected Accounts\",\"col\":4}},{\"id\":\"W7HMLTGzeJ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Disconnected Accounts\",\"col\":4}},{\"id\":\"TfinXmZztB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Groups\",\"col\":4}},{\"id\":\"kBGIPv-xs2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sbymhsnKM5\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Sent Messages\",\"col\":4}},{\"id\":\"5s7Gv0ALav\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Sent Images\",\"col\":4}},{\"id\":\"wv4pOb_8R9\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Sent Files\",\"col\":4}},{\"id\":\"BIofT3gvHs\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gdzQHLZnQ-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WA Setting\",\"col\":5}},{\"id\":\"KyKUzEBB4r\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WA Account\",\"col\":5}},{\"id\":\"Vad6--ztmz\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WA Automation Rule\",\"col\":5}},{\"id\":\"2EjDTA3ixQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WA Log\",\"col\":5}},{\"id\":\"wPjt3hAXhJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Groups\",\"col\":5}},{\"id\":\"K2u802HXm_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Log Summary Report\",\"col\":5}}]",
+ "creation": "2025-04-08 15:05:43.645662",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "call",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Whatsapp",
+ "links": [],
+ "modified": "2025-04-09 11:24:06.665481",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "Whatsapp",
+ "number_cards": [
+  {
+   "label": "Sent Messages",
+   "number_card_name": "Sent Messages"
+  },
+  {
+   "label": "Connected Accounts",
+   "number_card_name": "Connected Account"
+  },
+  {
+   "label": "Sent Images",
+   "number_card_name": "Sent Images"
+  },
+  {
+   "label": "Disconnected Accounts",
+   "number_card_name": "Disconnected Accounts"
+  },
+  {
+   "label": "Groups",
+   "number_card_name": "Groups"
+  },
+  {
+   "label": "Sent Files",
+   "number_card_name": "Sent Files"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 28.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Groups",
+   "link_to": "WA Channel",
+   "stats_filter": "[[\"WA Channel\",\"type\",\"=\",\"Group\",false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Log Summary Report",
+   "link_to": "WhatsApp Log Summary",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "WA Account",
+   "link_to": "WA Account",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "WA Log",
+   "link_to": "WA Log",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "WA Setting",
+   "link_to": "WA Setting",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "WA Automation Rule",
+   "link_to": "WA Automation Rule",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Whatsapp"
+}

@@ -5,16 +5,23 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "wa_automation_rule",
   "sender",
   "sender_phone",
   "receiver_id",
   "status",
+  "channel_type",
+  "user_id",
   "column_break_qeeo",
   "send_date",
   "type",
   "wa_message_id",
+  "repeat_solve",
+  "failure_message",
   "section_break_bvup",
   "content",
+  "phone_number",
+  "last_code",
   "section_break_nwtw",
   "ref_doctype",
   "file_type",
@@ -25,7 +32,8 @@
   "is_mention",
   "is_screenshot",
   "column_break_xcgt",
-  "ref_document"
+  "ref_document",
+  "file_reference"
  ],
  "fields": [
   {
@@ -37,7 +45,8 @@
   {
    "fieldname": "sender_phone",
    "fieldtype": "Data",
-   "label": "Sender ID"
+   "label": "Sender ID",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_qeeo",
@@ -52,7 +61,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nSet Admin\nSet Avatar"
+   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nPromote User\nDemote User\nSet Avatar\nLogin Code\nLogin QR\nLogout\nUpdate Account Status\nSync Groups"
   },
   {
    "fieldname": "wa_message_id",
@@ -80,7 +89,7 @@
   {
    "fieldname": "ref_doctype",
    "fieldtype": "Link",
-   "label": "Ref Doctype",
+   "label": "Doctype Ref",
    "options": "DocType"
   },
   {
@@ -103,7 +112,7 @@
   {
    "fieldname": "ref_document",
    "fieldtype": "Dynamic Link",
-   "label": "Ref Document",
+   "label": "Document Ref",
    "options": "ref_doctype"
   },
   {
@@ -140,15 +149,58 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "\nSent\nFailed"
+   "options": "\nQueued\nSent\nFailed"
+  },
+  {
+   "fieldname": "wa_automation_rule",
+   "fieldtype": "Link",
+   "label": "WA Automation Rule",
+   "options": "WA Automation Rule"
+  },
+  {
+   "fieldname": "repeat_solve",
+   "fieldtype": "Data",
+   "label": "Repeat Solve"
+  },
+  {
+   "fieldname": "failure_message",
+   "fieldtype": "Small Text",
+   "label": "Failure Message",
+   "read_only": 1
+  },
+  {
+   "fieldname": "channel_type",
+   "fieldtype": "Select",
+   "label": "Channel Type",
+   "options": "\nDirect\nGroup"
+  },
+  {
+   "fieldname": "file_reference",
+   "fieldtype": "Data",
+   "label": "File Reference"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "last_code",
+   "fieldtype": "Small Text",
+   "label": "Last Code"
+  },
+  {
+   "fieldname": "user_id",
+   "fieldtype": "Data",
+   "label": "User ID"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-05 02:29:10.607988",
+ "modified": "2025-03-24 01:10:03.814194",
  "modified_by": "Administrator",
  "module": "WhatsApp",
- "name": "WA Logs",
+ "name": "WA Log",
  "owner": "Administrator",
  "permissions": [
   {

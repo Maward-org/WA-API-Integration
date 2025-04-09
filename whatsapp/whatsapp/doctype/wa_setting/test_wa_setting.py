@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestWALogs(FrappeTestCase):
+class TestWASetting(FrappeTestCase):
 	pass

@@ -1,0 +1,241 @@
+{
+ "actions": [],
+ "autoname": "field:channel_id",
+ "creation": "2025-03-11 02:35:52.944652",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_rrff",
+  "is_parent",
+  "column_break_qevtu",
+  "section_break_xxef",
+  "channel_creator",
+  "creator_id",
+  "channel_image",
+  "column_break_oxvg",
+  "channel_name",
+  "channel_id",
+  "section_break_jca2a",
+  "parent_channel",
+  "parent_channel_creator",
+  "status",
+  "column_break_tbzsr",
+  "platform",
+  "type",
+  "is_website_support_group",
+  "chat_profile",
+  "creation_date",
+  "modified_date",
+  "section_break_fuzta",
+  "members",
+  "contributors",
+  "section_break_mmasg",
+  "last_message",
+  "column_break_g8y26",
+  "last_message_number",
+  "last_responder_user"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "is_parent",
+   "fieldtype": "Check",
+   "label": "Is Parent"
+  },
+  {
+   "fieldname": "column_break_qevtu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_jca2a",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "channel_creator",
+   "fieldtype": "Link",
+   "label": "Channel Creator",
+   "options": "WA Account",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.is_parent == 0",
+   "fieldname": "parent_channel",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Parent Channel",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "parent_channel_creator",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parent Channel Creator"
+  },
+  {
+   "fieldname": "channel_name",
+   "fieldtype": "Data",
+   "label": "Channel Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tbzsr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "ERPNext Chat WhatsApp",
+   "fieldname": "platform",
+   "fieldtype": "Select",
+   "label": "Platform",
+   "options": "ERPNext Chat\nERPNext Chat WhatsApp",
+   "read_only": 1
+  },
+  {
+   "default": "Group",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Guest\nDirect\nGroup",
+   "read_only": 1
+  },
+  {
+   "fieldname": "chat_profile",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Chat Profile",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "creation_date",
+   "fieldtype": "Datetime",
+   "label": "Creation Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "modified_date",
+   "fieldtype": "Datetime",
+   "label": "Modified Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_fuzta",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "members",
+   "fieldtype": "Table",
+   "label": "Members",
+   "options": "WA Channel User"
+  },
+  {
+   "depends_on": "eval:doc.is_parent == 1",
+   "fieldname": "contributors",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Contributors",
+   "options": "Sales Invoice Item"
+  },
+  {
+   "fieldname": "section_break_mmasg",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "last_message",
+   "fieldtype": "Text",
+   "label": "Last Message"
+  },
+  {
+   "fieldname": "column_break_g8y26",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_message_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Last Message Number"
+  },
+  {
+   "fieldname": "channel_image",
+   "fieldtype": "Attach Image",
+   "label": "Channel Image"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.type == \"Group\"",
+   "fieldname": "is_website_support_group",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is Website Support Group"
+  },
+  {
+   "fieldname": "last_responder_user",
+   "fieldtype": "Link",
+   "label": "Last Responder User",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "section_break_rrff",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "section_break_xxef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_oxvg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPending\nCreated",
+   "read_only": 1
+  },
+  {
+   "fieldname": "channel_id",
+   "fieldtype": "Data",
+   "label": "Channel ID",
+   "mandatory_depends_on": "eval:doc.status==\"Created\"",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "channel_creator.device_id",
+   "fieldname": "creator_id",
+   "fieldtype": "Data",
+   "label": "Creator ID",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-26 00:50:12.754166",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "WA Channel",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Chat Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

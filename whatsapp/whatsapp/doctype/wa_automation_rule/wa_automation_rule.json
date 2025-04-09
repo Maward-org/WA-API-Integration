@@ -1,0 +1,284 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-07 17:46:49.147859",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "document_type",
+  "channel_type",
+  "recipient_phone_field",
+  "event",
+  "column_break_tkmk",
+  "trigger_method",
+  "date_changed",
+  "days_before_or_after",
+  "value_changed",
+  "sending_account",
+  "section_break_sowk",
+  "condition",
+  "column_break_iamz",
+  "html_taqq",
+  "section_break_wxar",
+  "action_type",
+  "message_content",
+  "group_details_section",
+  "group_name_reference",
+  "group_name",
+  "group_id",
+  "group_members",
+  "section_break_crxz",
+  "file_type",
+  "is_media",
+  "is_document",
+  "is_link",
+  "is_voice_clip",
+  "is_mention",
+  "is_screenshot",
+  "column_break_kcas",
+  "file_field",
+  "view_once",
+  "compress"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.channel_type==\"Direct\"",
+   "fieldname": "recipient_phone_field",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Recipient Phone Field",
+   "mandatory_depends_on": "eval: doc.channel_type==\"Direct\""
+  },
+  {
+   "fieldname": "column_break_tkmk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.event=='Method'",
+   "description": "Trigger on valid methods like \"before_insert\", \"after_update\", etc (will depend on the DocType selected)",
+   "fieldname": "trigger_method",
+   "fieldtype": "Data",
+   "label": "Trigger Method",
+   "mandatory_depends_on": "eval:doc.event=='Method'"
+  },
+  {
+   "depends_on": "eval:doc.document_type && (doc.event==\"Days After\" || doc.event==\"Days Before\")",
+   "description": "Send days before or after the reference date",
+   "fieldname": "days_before_or_after",
+   "fieldtype": "Int",
+   "label": "Days Before or After"
+  },
+  {
+   "depends_on": "eval:doc.document_type && doc.event==\"Value Change\"",
+   "description": "Send message if this field's value changes",
+   "fieldname": "value_changed",
+   "fieldtype": "Select",
+   "label": "Value Changed",
+   "mandatory_depends_on": "eval:doc.document_type && doc.event==\"Value Change\""
+  },
+  {
+   "fieldname": "sending_account",
+   "fieldtype": "Link",
+   "label": "Sending Account",
+   "options": "WA Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_sowk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Optional: The alert will be sent if this expression is true",
+   "fieldname": "condition",
+   "fieldtype": "Code",
+   "label": "Condition"
+  },
+  {
+   "fieldname": "column_break_iamz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_taqq",
+   "fieldtype": "HTML",
+   "options": "<p><strong>Condition Examples:</strong></p>\n<pre>doc.status==\"Open\"<br>doc.due_date==nowdate()<br>doc.total &gt; 40000\n</pre>\n"
+  },
+  {
+   "fieldname": "section_break_wxar",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "action_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Action Type",
+   "reqd": 1
+  },
+  {
+   "default": "Message Example:\n            Hello {{doc.customer}},\n            Here are your invoice details:\n            Name:{{doc.name}}\n",
+   "fieldname": "message_content",
+   "fieldtype": "Long Text",
+   "label": "Message Content",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_crxz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "file_type",
+   "fieldtype": "Select",
+   "label": "File Type",
+   "options": "\nImage\nAudio\nFile\nVideo\nContact"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_media",
+   "fieldtype": "Check",
+   "label": "Is Media"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_document",
+   "fieldtype": "Check",
+   "label": "Is Document"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_link",
+   "fieldtype": "Check",
+   "label": "Is Link"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_voice_clip",
+   "fieldtype": "Check",
+   "label": "Is Voice Clip"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_mention",
+   "fieldtype": "Check",
+   "label": "Is Mention"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_screenshot",
+   "fieldtype": "Check",
+   "label": "Is Screenshot"
+  },
+  {
+   "fieldname": "column_break_kcas",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "file_field",
+   "fieldtype": "Select",
+   "label": "File Field",
+   "mandatory_depends_on": "eval:(doc.action_type==\"Send Image\"||doc.action_type==\"Send File\")"
+  },
+  {
+   "default": "0",
+   "fieldname": "view_once",
+   "fieldtype": "Check",
+   "label": "View once"
+  },
+  {
+   "default": "0",
+   "fieldname": "compress",
+   "fieldtype": "Check",
+   "label": "Compress "
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Send Message On",
+   "options": "\nNew\nSave\nSubmit\nCancel\nDays After \u2716\nDays Before \u2716\nValue Change\nMethod \u2716",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.document_type && (doc.event==\"Days After\" || doc.event==\"Days Before\")",
+   "description": "Send alert if date matches this field's value",
+   "fieldname": "date_changed",
+   "fieldtype": "Select",
+   "label": "Reference Date",
+   "mandatory_depends_on": "eval:doc.document_type && (doc.event==\"Days After\" || doc.event==\"Days Before\")"
+  },
+  {
+   "fieldname": "channel_type",
+   "fieldtype": "Select",
+   "label": "Channel Type",
+   "options": "Direct\nGroup"
+  },
+  {
+   "fieldname": "group_name",
+   "fieldtype": "Link",
+   "label": "Group Name",
+   "options": "WA Channel"
+  },
+  {
+   "depends_on": "eval: doc.channel_type==\"Group\"",
+   "fetch_from": "group_name.channel_id",
+   "fieldname": "group_id",
+   "fieldtype": "Data",
+   "label": "Group ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "group_members",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Group Members",
+   "options": "WA Automation Members"
+  },
+  {
+   "fieldname": "group_details_section",
+   "fieldtype": "Section Break",
+   "label": "Group Details"
+  },
+  {
+   "fieldname": "group_name_reference",
+   "fieldtype": "Select",
+   "label": "Group Name Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-23 20:20:06.012879",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "WA Automation Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

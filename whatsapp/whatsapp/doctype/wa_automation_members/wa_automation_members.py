@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class WAQRDetails(Document):
+class WAAutomationMembers(Document):
 	pass

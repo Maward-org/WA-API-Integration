@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class WALogs(Document):
+class WAChannelUser(Document):
 	pass

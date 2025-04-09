@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestWAQRDetails(FrappeTestCase):
+class TestWAChannelUser(FrappeTestCase):
 	pass

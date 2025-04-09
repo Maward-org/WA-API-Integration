@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-11 15:52:53.078435",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "profile_id",
+  "user_type",
+  "user",
+  "user_id",
+  "platform",
+  "active",
+  "last_message_read",
+  "unread_messages",
+  "is_removed",
+  "remove_date",
+  "is_admin",
+  "channel_last_message_number",
+  "platform_profile",
+  "platform_gateway",
+  "pending_messages"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "user_type"
+  },
+  {
+   "fieldname": "last_message_read",
+   "fieldtype": "Int",
+   "label": "Last Message Read"
+  },
+  {
+   "default": "1",
+   "fieldname": "unread_messages",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Unread Messages"
+  },
+  {
+   "fieldname": "platform",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Platform"
+  },
+  {
+   "default": "0",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Active"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "is_removed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Removed"
+  },
+  {
+   "fieldname": "remove_date",
+   "fieldtype": "Datetime",
+   "label": "Remove Date"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "is_admin",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Admin"
+  },
+  {
+   "fieldname": "channel_last_message_number",
+   "fieldtype": "Int",
+   "label": "Channel Last Message Number"
+  },
+  {
+   "fieldname": "profile_id",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Profile Id",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "platform_profile",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Platform",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "platform_gateway",
+   "fieldtype": "Dynamic Link",
+   "hidden": 1,
+   "label": "Platform Gateway",
+   "options": "platform_profile"
+  },
+  {
+   "default": "0",
+   "fieldname": "pending_messages",
+   "fieldtype": "Int",
+   "label": "Pending Messages"
+  },
+  {
+   "fieldname": "user_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "User Type"
+  },
+  {
+   "fieldname": "user_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "User ID",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-24 16:16:49.325297",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "WA Channel User",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
