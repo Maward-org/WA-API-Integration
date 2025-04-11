@@ -6,7 +6,10 @@
  "engine": "InnoDB",
  "field_order": [
   "main_domain",
-  "user_types"
+  "user_types",
+  "wa_hrms_section",
+  "hrms_sender",
+  "send_slips"
  ],
  "fields": [
   {
@@ -19,12 +22,28 @@
    "fieldtype": "Table",
    "label": "User Types",
    "options": "User Type Map"
+  },
+  {
+   "fieldname": "send_slips",
+   "fieldtype": "Button",
+   "label": "Send Slips"
+  },
+  {
+   "fieldname": "wa_hrms_section",
+   "fieldtype": "Section Break",
+   "label": "WA HRMS"
+  },
+  {
+   "fieldname": "hrms_sender",
+   "fieldtype": "Link",
+   "label": "Sender",
+   "options": "WA Account"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-03-23 21:11:51.510588",
+ "modified": "2025-04-09 15:14:08.528317",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Setting",

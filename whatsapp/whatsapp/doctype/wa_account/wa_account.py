@@ -42,6 +42,7 @@ class WAAccount(Document):
 
 	@frappe.whitelist()
 	def create_account_log(self,type,phone=None):
+		# frappe.msgprint(f"create_account_log {type}")
 			
 		doc=frappe.get_doc({
 			"doctype": "WA Log",

@@ -3,7 +3,7 @@
 frappe.ui.form.on('WA Account', {
     refresh: function(frm) {
         toggle_btn(frm)
-        update_status(frm)
+        // update_status(frm)
         if (frm.doc.domain) { 
             frm.add_custom_button('Refresh Status', function() {
                 update_status(frm)
@@ -61,6 +61,7 @@ function toggle_btn(frm) {
             })
             } else if (frm.doc.status == "Disconnected") { 
                 frm.add_custom_button('Get QR', function() {
+                    // console.log("hereee ")
 
 
           
@@ -75,6 +76,7 @@ function toggle_btn(frm) {
                             },
                            
                             callback: function(response) {
+                                console.log("hereee")
                                 // frm.refresh_field("last_qr");
                                 // frm.refresh_field("get_qr");
                                 // frm.refresh_field("qr_updated");
@@ -331,12 +333,11 @@ function update_status(frm){
             
         
         callback: function(response) {
-            // console.log(response.message)
-            // setTimeout(function() {
-            //     frm.refresh_field("status");
-            // }, 3000); // 3000 milliseconds = 3 seconds
-
-
+            frappe.msgprint("Please Wait")
+           
+            setTimeout(function() {
+                location.reload(); 
+            }, 3000); 
     
     
     }
