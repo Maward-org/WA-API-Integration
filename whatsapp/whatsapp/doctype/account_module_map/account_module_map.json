@@ -1,0 +1,42 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-16 23:15:01.135131",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sending_account",
+  "module"
+ ],
+ "fields": [
+  {
+   "fieldname": "sending_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sending Account",
+   "options": "WA Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "module",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Module",
+   "options": "Module Def",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-04-16 23:38:44.565283",
+ "modified_by": "Administrator",
+ "module": "WhatsApp",
+ "name": "Account Module Map",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

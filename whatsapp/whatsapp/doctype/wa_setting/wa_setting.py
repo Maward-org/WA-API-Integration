@@ -9,6 +9,10 @@ from frappe.utils.file_manager import save_file
 
 
 class WASetting(Document):
+	def validate(self):
+		if self.enable_slips:
+			if not self.hrms_sender:
+				frappe.throw("Please Assign Sender Account.")
 	
 
 

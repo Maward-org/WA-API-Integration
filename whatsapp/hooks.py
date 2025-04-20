@@ -27,6 +27,12 @@ app_license = "mit"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/whatsapp/css/whatsapp.css"
 # app_include_js = "/assets/whatsapp/js/whatsapp.js"
+app_include_js = ["/assets/whatsapp/js/custom_toolbar.js",
+                  "/assets/whatsapp/js/wa_composer.js"
+]
+
+
+
 
 # include js, css files in header of web template
 # web_include_css = "/assets/whatsapp/css/whatsapp.css"
@@ -43,7 +49,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Salary Slip" : "public/js/salary_slip.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -129,10 +135,10 @@ app_license = "mit"
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
+#
+override_doctype_class = {
+    "Contact": "whatsapp.overrides.custom_contact.CustomContact"
+}
 # Document Events
 # ---------------
 # Hook on document methods and events

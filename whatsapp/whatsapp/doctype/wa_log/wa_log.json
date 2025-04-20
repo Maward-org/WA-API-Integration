@@ -61,7 +61,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nPromote User\nDemote User\nSet Avatar\nLogin Code\nLogin QR\nLogout\nUpdate Account Status\nSync Groups"
+   "options": "\nSend Message\nSend Image\nSend File\nCreate Group\nRename Group\nAdd User\nRemove User\nUser Left\nPromote User\nDemote User\nSet Avatar\nLogin Code\nLogin QR\nLogout\nUpdate Account Status\nSync Groups\nSend Generated File\nSend Attach"
   },
   {
    "fieldname": "wa_message_id",
@@ -197,7 +197,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-24 01:10:03.814194",
+ "modified": "2025-04-15 22:40:10.474518",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Log",

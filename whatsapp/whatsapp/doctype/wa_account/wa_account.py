@@ -20,18 +20,18 @@ class WAAccount(Document):
 	# 	return num or ""
 
 
-	def validate(self):
-		if self.is_new():
-			wa_details = frappe.get_doc({
-			'doctype': 'WA QR Details',
-			'wa_account': self.name,  
+	# def validate(self):
+	# 	if self.is_new():
+	# 		wa_details = frappe.get_doc({
+	# 		'doctype': 'WA QR Details',
+	# 		'wa_account': self.name,  
 			
-				})
+	# 			})
 		
-			wa_details.insert()
-			frappe.msgprint(f"Created WA QR Details for {self.name}")
+	# 		wa_details.insert()
+	# 		frappe.msgprint(f"Created WA QR Details for {self.name}")
 
-		frappe.db.set_value("WA QR Details", {"wa_account": self.name}, "domain", self.domain)
+		# frappe.db.set_value("WA QR Details", {"wa_account": self.name}, "domain", self.domain)
 
 	@frappe.whitelist()
 	def trigger_login_webhook(self):

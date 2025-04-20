@@ -227,19 +227,24 @@ frappe.ui.form.on("WA Automation Rule", {
 	channel_type(frm){
 		frm.trigger('action_type');
 		let new_options = [];
-		let current_options = frm.fields_dict.action_type.df.options.split("\n");
+		let updated_options=[];
+		if (frm.fields_dict.action_type.df.options)
+		{let current_options = frm.fields_dict.action_type.df.options.split("\n");
 
 
 
 		if (frm.doc.channel_type === "Group") {
-			console.log("here")
+			// console.log("here")
 			new_options = ["Create Group", "Add User", "Remove User", "Promote User", "Demote User"];
 		}
 		else{
 			current_options=["","Send Message","Send Image","Send File"]
 		}
-		let updated_options = [...new Set([...current_options, ...new_options])];
-
+		updated_options = [...new Set([...current_options, ...new_options])];
+		}
+		else{
+			updated_options=["","Send Message","Send Image","Send File"]
+		}
 
 	
 		frm.set_df_property("action_type", "options", updated_options.join("\n")); 

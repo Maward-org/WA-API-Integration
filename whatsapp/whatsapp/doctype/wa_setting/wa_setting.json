@@ -7,9 +7,15 @@
  "field_order": [
   "main_domain",
   "user_types",
+  "section_break_ajwi",
+  "account_module_settings",
   "wa_hrms_section",
   "hrms_sender",
-  "send_slips"
+  "send_slips",
+  "enable_slips",
+  "wa_erpnext_section",
+  "sender",
+  "enable_sending_customer_reports"
  ],
  "fields": [
   {
@@ -31,6 +37,7 @@
   {
    "fieldname": "wa_hrms_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "WA HRMS"
   },
   {
@@ -38,12 +45,47 @@
    "fieldtype": "Link",
    "label": "Sender",
    "options": "WA Account"
+  },
+  {
+   "default": "0",
+   "description": "Shows button in Salary slip & Payment Entry.",
+   "fieldname": "enable_slips",
+   "fieldtype": "Check",
+   "label": "Enable Sending Salary Slips"
+  },
+  {
+   "fieldname": "wa_erpnext_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "WA ERPNext"
+  },
+  {
+   "fieldname": "sender",
+   "fieldtype": "Link",
+   "label": "Sender",
+   "options": "WA Account"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_sending_customer_reports",
+   "fieldtype": "Check",
+   "label": "Enable Sending Customer Reports"
+  },
+  {
+   "fieldname": "section_break_ajwi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "account_module_settings",
+   "fieldtype": "Table",
+   "label": "Account-Module Settings",
+   "options": "Account Module Map"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-04-09 15:14:08.528317",
+ "modified": "2025-04-16 23:17:55.055757",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Setting",

@@ -9,7 +9,7 @@ from frappe.email.doctype.notification.notification import Notification
 
 
 
-class WAAutomationRule(Notification):
+class WAAutomationRule(Document):
 	
 
 
