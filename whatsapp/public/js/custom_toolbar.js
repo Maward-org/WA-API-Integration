@@ -2,9 +2,11 @@
 
 if (frappe.boot) {
     override_toolbar();
+    override_report_view();
 } else {
     frappe.after_ajax(() => {
         override_toolbar();
+        override_report_view();
     });
 }
 
@@ -29,6 +31,35 @@ function override_toolbar() {
     }
 
     frappe.ui.form.Toolbar = CustomToolbar;
+}
+
+function override_report_view(){
+    console.log("override_report_view")
+	// Wait for Frappe to be fully loaded
+	const ReportView = frappe.views.ReportView;
+
+	if (!ReportView) return;
+
+	const original = ReportView.prototype.report_menu_items;
+
+	ReportView.prototype.report_menu_items = function () {
+		// Call original method to get default menu items
+		let items = original.call(this);
+        const frm = this.frm;
+
+
+		// Add your custom item
+        console.log("pp")
+		items.push({
+			label: __("Send Via WhatsApp"),
+			action: () => {
+                new frappe.views.ReportWhatsAppComposer({ report: this });
+				
+			},
+		});
+
+		return items;
+	};
 }
 
 

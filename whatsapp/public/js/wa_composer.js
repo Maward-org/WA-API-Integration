@@ -81,6 +81,7 @@ frappe.views.WhatsAppComposer = class {
 							
 							
 						},
+						
 						{ fieldtype: "Column Break" },
 						{
 							label: "Select Attachments",

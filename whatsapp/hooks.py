@@ -28,7 +28,9 @@ app_license = "mit"
 # app_include_css = "/assets/whatsapp/css/whatsapp.css"
 # app_include_js = "/assets/whatsapp/js/whatsapp.js"
 app_include_js = ["/assets/whatsapp/js/custom_toolbar.js",
-                  "/assets/whatsapp/js/wa_composer.js"
+                  "/assets/whatsapp/js/wa_composer.js",
+                  "/assets/whatsapp/js/report_wa_composer.js"
+                  
 ]
 
 
