@@ -6,10 +6,16 @@
  "engine": "InnoDB",
  "field_order": [
   "enabled",
+  "scheduled",
   "document_type",
+  "report_ref",
+  "schedule_interval",
   "channel_type",
   "recipient_phone_field",
   "event",
+  "receiver",
+  "start_date",
+  "last_run",
   "column_break_tkmk",
   "trigger_method",
   "date_changed",
@@ -57,7 +63,7 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval: doc.channel_type==\"Direct\"",
+   "depends_on": "eval: doc.channel_type==\"Direct\" && !doc.scheduled",
    "fieldname": "recipient_phone_field",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -204,6 +210,7 @@
    "label": "Compress "
   },
   {
+   "depends_on": "eval:!doc.scheduled",
    "fieldname": "event",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -255,11 +262,50 @@
    "fieldname": "group_name_reference",
    "fieldtype": "Select",
    "label": "Group Name Reference"
+  },
+  {
+   "default": "0",
+   "fieldname": "scheduled",
+   "fieldtype": "Check",
+   "label": "Scheduled "
+  },
+  {
+   "depends_on": "scheduled",
+   "fieldname": "receiver",
+   "fieldtype": "Data",
+   "label": "Receiver"
+  },
+  {
+   "depends_on": "scheduled",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "depends_on": "scheduled",
+   "fieldname": "last_run",
+   "fieldtype": "Date",
+   "label": "Last Run"
+  },
+  {
+   "depends_on": "scheduled",
+   "description": "Leave empty for standard.",
+   "fieldname": "report_ref",
+   "fieldtype": "Link",
+   "label": "Report Ref",
+   "options": "Report"
+  },
+  {
+   "depends_on": "scheduled",
+   "fieldname": "schedule_interval",
+   "fieldtype": "Select",
+   "label": "Schedule Interval",
+   "options": "Daily\nWeekly\nMonthly\nYearly"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-23 20:20:06.012879",
+ "modified": "2025-04-23 14:27:38.718876",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Automation Rule",
@@ -278,6 +324,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

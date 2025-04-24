@@ -171,11 +171,29 @@ frappe.wa_auto_rule = {
 	},)},
 
 	}
+function set_report_filter(frm) {
+	const ref_doctype = frm.doc.document_type;
+
+	if (!ref_doctype) return;
+
+	frm.set_query("report_ref", () => {
+		return {
+			filters: {
+				ref_doctype: ref_doctype
+			}
+		};
+	});
+}
 
 
 
 
 frappe.ui.form.on("WA Automation Rule", {
+	document_type(frm) {
+		set_report_filter(frm);
+
+	},
+
 	
 	onload: function (frm) {
 		console.log("onload")
@@ -187,7 +205,13 @@ frappe.ui.form.on("WA Automation Rule", {
 					istable: 0,
 				},
 			};
-		});
+		}); 
+		set_report_filter(frm);
+
+		
+		
+		
+		
 		
 	},
 	refresh: function (frm) {
@@ -287,4 +311,5 @@ frappe.ui.form.on("WA Automation Rule", {
 	// 	}
 	// },
 });
+
 
