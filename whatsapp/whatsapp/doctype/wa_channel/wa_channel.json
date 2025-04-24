@@ -213,9 +213,10 @@
    "reqd": 1
   }
  ],
+ "image_field": "channel_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-26 00:50:12.754166",
+ "modified": "2025-04-24 00:53:32.196139",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Channel",
@@ -235,6 +236,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
