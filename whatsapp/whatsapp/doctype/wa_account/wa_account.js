@@ -33,20 +33,18 @@ function toggle_btn(frm) {
 
         if (!frm.is_new()) { 
             if (frm.doc.status == "Connected") { 
-                frm.add_custom_button('Logout', function() {
-                   
+                frm.add_custom_button('Logout', function() {                
                     frappe.call({
                         method: "create_account_log",
                         doc:frm.doc,
-                        args:{
-                              
+                        args:{                 
                             type:"Logout"
                         },
-                       
-                        
+                        freeze: true,
+                        freeze_message: "جاري تسجيل الخروج..", 
                     });
                     
-                }).addClass('btn-success');
+                }).addClass('btn-primary');
                 frm.add_custom_button('Sync Groups', function(){
                     
                     frappe.call({
@@ -60,13 +58,8 @@ function toggle_btn(frm) {
                     
             })
             } else if (frm.doc.status == "Disconnected") { 
-                frm.add_custom_button('Get QR', function() {
+                frm.add_custom_button('Get QR Code', function() {
                     // console.log("hereee ")
-
-
-          
-           
-
                         frappe.call({
                             method: "create_account_log",
                             doc:frm.doc,
@@ -154,9 +147,9 @@ function toggle_btn(frm) {
 
 
                     
-                }).addClass('btn-success');
+                },__("Login")).addClass('btn-primary');
 
-                frm.add_custom_button('Get Code', function() {
+                frm.add_custom_button('Get Direct Code', function() {
 
                     let d = new frappe.ui.Dialog({
                         title: 'Login Through Code',
@@ -165,7 +158,8 @@ function toggle_btn(frm) {
                                 label:'Phone Number',
                                 fieldname: 'phone_number',
                                 fieldtype: 'Phone',
-                                reqd: 1
+                                reqd: 1,
+                                default:frm.doc.phone_number
                             },
                             {
                                 fieldname: 'code_html',
@@ -313,7 +307,7 @@ function toggle_btn(frm) {
 
 
                 
-            }).addClass('btn-success');
+            },__("Login"));
             }
         }
 
@@ -330,8 +324,8 @@ function update_status(frm){
               
             type:"Update Account Status"
         },
-            
-        
+        freeze: true,
+        freeze_message: "جاري..",
         callback: function(response) {
             frappe.msgprint("Please Wait")
            
