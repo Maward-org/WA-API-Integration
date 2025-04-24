@@ -59,7 +59,7 @@ frappe.views.ReportWhatsAppComposer = class {
 			],
 			primary_action_label: __("Send"),
 			primary_action: (values) => {
-				frappe.msgprint("sent7")
+				// frappe.msgprint("sent7")
 				console.log(this.report.data)
 				values.is_report = true;
 				values.report_name=this.report_name,
@@ -117,9 +117,8 @@ frappe.views.ReportWhatsAppComposer = class {
 						data:values
 					},
 					callback: function(r) {
-						if (r.message) {
-							frappe.msgprint("PDF saved: <a href='" + r.message + "' target='_blank'>" + r.message + "</a>");
-						}
+						me.dialog.hide();
+						
 					}
 				});
 				

@@ -17,7 +17,7 @@ function override_toolbar() {
             const frm = this.frm;
 
 
-            frappe.msgprint("hhh6")
+            // frappe.msgprint("hhh6")
             this.page.add_action_icon(
                 "custom-whatsapp",
                 
