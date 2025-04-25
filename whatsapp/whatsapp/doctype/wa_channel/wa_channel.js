@@ -17,20 +17,13 @@ frappe.ui.form.on("WA Channel", {
             
             callback: function(child_response) {
                 if (child_response.message) {
-
-
                     frm.fields_dict.members.grid.update_docfield_property(
                         "user_type", "options", child_response.message.join("\n")
                     );
-                    frm.refresh_field("members");
-                
-                   
-                   
+                    frm.refresh_field("members");     
                 }
             }
-        });
-                
-        
+        });     
     },
 	after_save(frm) {
     //     let creation_time = frm.doc.creation.split(".")[0];
@@ -54,16 +47,11 @@ frappe.ui.form.on("WA Channel", {
     
 	}})
 
-
-
-
-
 frappe.ui.form.on("WA Channel User", "user_type", function(frm, cdt, cdn) {
     // console.log("here")
     var item = locals[cdt][cdn];
     item.user = "";
     frm.refresh_field("members");
-
 });
 frappe.ui.form.on("WA Channel User", "user", function(frm, cdt, cdn) {
     var item = locals[cdt][cdn];  

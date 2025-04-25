@@ -37,17 +37,21 @@ class WAChannel(Document):
 
 		
 	@frappe.whitelist()
-
 	def create_log(self):
 		# Create WA Logs entry
 		if self.status=="Created":
 			self.sync_members_with_whatsapp()
 		else:
-			frappe.msgprint("create_log")
+			# frappe.msgprint("create_log")
 
 			if self.status=="Draft":
 				#append cerator as member
-				self.append("members", {"user_id": self.creator_id.split(":")[0],"is_admin":True})  # Assuming 'members' is a child table with 'user' field
+				self.append("members", {
+					"user_id": self.creator_id.split(":")[0],
+					"is_super_admin":True,
+					"user_type":"WA Account",
+					"user": self.channel_creator
+					})  # Assuming 'members' is a child table with 'user' field
 
 				doc=frappe.get_doc({
 					"doctype": "WA Log",
