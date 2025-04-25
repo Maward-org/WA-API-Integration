@@ -1,0 +1,24 @@
+<div class="page-break">
+	{%- if print_settings.repeat_header_footer %}
+	<div id="header-html" class="hidden-pdf">
+		{% if letter_head %}
+			<div class="letter-head">{{ letter_head }}</div>
+		{% endif %}
+	</div>
+	{%- endif %}
+
+	<div class="print-content">
+		{{ content }}
+	</div>
+
+	{%- if print_settings.repeat_header_footer %}
+	<div id="footer-html" class="visible-pdf">
+		{% if footer %}
+		<div class="letter-head-footer">{{ footer }}</div>
+		{% endif %}
+		<p class="text-center small page-number visible-pdf">
+			{{ _("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }}
+		</p>
+	</div>
+	{%- endif %}
+</div>

@@ -1,0 +1,43 @@
+{% if title %}
+<h2>{{ _(title) }}</h2>
+<hr>
+{% endif %}
+
+{% if subtitle %}
+<p>{{ subtitle }}</p>
+<hr>
+{% endif %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>#</th>
+			{% for col in columns %}
+				{% if col.name and col._id != "_check" %}
+					<th {% if col.minWidth %} style="min-width: {{ col.minWidth }}px" {% endif %}>
+						{{ _(col.name) }}
+					</th>
+				{% endif %}
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in data %}
+			<tr>
+				<td {% if row.bold %} style="font-weight: bold" {% endif %}>{{ loop.index }}</td>
+				{% for col in columns %}
+					{% if col.name and col._id != "_check" %}
+						{% set value = row[col.fieldname] if col.fieldname else row[col.id] %}
+						<td {% if row.bold %} style="font-weight: bold" {% endif %}>
+							{% if row.is_total_row and loop.index0 == 0 %}
+								{{ _("Total") }}
+							{% else %}
+								{{ value }}
+							{% endif %}
+						</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
