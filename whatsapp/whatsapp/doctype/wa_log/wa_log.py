@@ -23,7 +23,7 @@ class WALog(Document):
 		:param log_data: Dictionary containing WA Logs data.
 		:return: Response from the webhook.
 		"""
-		url = "https://n8n.maward.org/webhook/process-log-pos.yemenfrappe.com"
+		url = "https://n8n.maward.org/webhook-test/process-log-pos.yemenfrappe.com"
 		headers = {
 			"Content-Type": "application/x-www-form-urlencoded"
 		}

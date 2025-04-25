@@ -257,7 +257,7 @@ def process_scheduled_rule():
                         as_dict=True,
                         ignore_prepared_report=True
                                 )
-                        grid_html = frappe.render_template("frappe/public/js/frappe/views/reports/print_grid.html", {
+                        grid_html = frappe.render_template("whatsapp/templates/includes/jinja_print_grid.html", {
                                 "title": report.name,
                                 "subtitle": "",
                                 "columns": columns,
@@ -267,32 +267,23 @@ def process_scheduled_rule():
                                 "can_use_smaller_font": True,
                                 "report": report
                         })
-                        full_html = frappe.render_template("frappe/templates/print_formats/standard.html", {
-                                "title": report.name,
+                        wrapper_html = frappe.render_template("whatsapp/templates/includes/jinja_standard.html", {
                                 "content": grid_html,
-                                "base_url": frappe.utils.get_url(),
-                                "print_css": frappe.get_print_style("Standard", as_dict=False),
-                                "lang": frappe.local.lang,
-                                "layout_direction": "rtl" if frappe.local.lang in ["ar", "ur", "he"] else "ltr",
-                                "landscape": True,
-                                "columns": columns,
-                                "can_use_smaller_font": True,
+                                "letter_head": "<p>Letterhead</p>",  # or pull from Company
+                                "footer": "<p>Footer</p>",
                                 "print_settings": {
-                                        "letter_head": {
-                                                "header": "<p>Header</p>",
-                                                "footer": "<p>Footer</p>"
-                                        },
                                         "repeat_header_footer": 1
                                 }
                         })
 
 
+
                         
-                        pdf_content = frappe.utils.pdf.get_pdf(full_html)
+                        pdf_content = frappe.utils.pdf.get_pdf(wrapper_html)
 
 
 
-                        print(f"hrml{full_html}")
+                        # print(f"hrml{wrapper_html}")
                         # pdf_content = frappe.utils.pdf.get_pdf(html)
                         print("PDF length:", len(pdf_content))
 
@@ -305,10 +296,13 @@ def process_scheduled_rule():
                         "content": pdf_content
                         })
                         file_doc.save(ignore_permissions=True)
+                        print(f"file_doc{file_doc}")
+
                         if file_doc:
                                 log_created=generate_log(account,rule.recipient,"Send Attach",rule.document_type,doc,"Direct","",file_doc.file_url)
                                 if log_created:
-                                        frappe.db.set_value("WA Automation Rule", rule.name, "last_run", now_datetime())
+                                        print("created")
+                                #         frappe.db.set_value("WA Automation Rule", rule.name, "last_run", now_datetime())
                         #         print("file_doc")
                         # file_doc = frappe.get_doc({
                         # "doctype": "File",

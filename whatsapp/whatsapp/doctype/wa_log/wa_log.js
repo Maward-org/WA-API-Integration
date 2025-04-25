@@ -14,6 +14,8 @@ frappe.ui.form.on("WA Log", {
         frm.add_custom_button("Resend", function () {
             // Mark the document as dirty (modified)
             frm.dirty();
+            
+            frm.set_value("status", "Queued");
 
             // Save the document
             frm.save();
