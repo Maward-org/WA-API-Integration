@@ -36,9 +36,10 @@
   },
   {
    "fieldname": "phone_number",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Phone Number"
+   "label": "Phone Number",
+   "options": "Phone"
   },
   {
    "fieldname": "account_name",
@@ -59,7 +60,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-24 00:16:24.837804",
+ "modified": "2025-04-24 22:45:21.540981",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Account",

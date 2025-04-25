@@ -9,17 +9,19 @@
   "profile_id",
   "user_type",
   "user",
+  "platform_profile",
   "user_id",
   "platform",
   "active",
-  "last_message_read",
   "unread_messages",
   "is_removed",
-  "remove_date",
   "is_admin",
+  "is_super_admin",
+  "column_break_aqis",
+  "last_message_read",
   "channel_last_message_number",
-  "platform_profile",
   "platform_gateway",
+  "remove_date",
   "pending_messages"
  ],
  "fields": [
@@ -121,17 +123,30 @@
    "in_list_view": 1,
    "label": "User ID",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_aqis",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_super_admin",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Super Admin",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-03-24 16:16:49.325297",
+ "modified": "2025-04-25 01:54:34.834057",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Channel User",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
