@@ -167,6 +167,14 @@ doc_events = {
 
 # Scheduled Tasks
 # ---------------
+scheduler_events = {
+    "cron": {
+        "* * * * *": [
+            "whatsapp.whatsapp.log_gen.method_name"
+        ]
+    }
+}
+
 
 # scheduler_events = {
 # 	"all": [

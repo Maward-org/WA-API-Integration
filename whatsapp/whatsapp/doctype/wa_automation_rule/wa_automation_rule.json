@@ -13,15 +13,15 @@
   "event",
   "channel_type",
   "recipient_phone_field",
-  "receiver",
+  "recipient",
   "start_date",
   "last_run",
   "column_break_tkmk",
+  "sending_account",
   "trigger_method",
   "date_changed",
   "days_before_or_after",
   "value_changed",
-  "sending_account",
   "group_details_section",
   "group_name_reference",
   "group_name",
@@ -98,9 +98,10 @@
    "mandatory_depends_on": "eval:doc.document_type && doc.event==\"Value Change\""
   },
   {
+   "bold": 1,
    "fieldname": "sending_account",
    "fieldtype": "Link",
-   "label": "Sending Account",
+   "label": "Sender Account",
    "options": "WA Account",
    "reqd": 1
   },
@@ -271,12 +272,6 @@
   },
   {
    "depends_on": "scheduled",
-   "fieldname": "receiver",
-   "fieldtype": "Data",
-   "label": "Receiver"
-  },
-  {
-   "depends_on": "scheduled",
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Start Date"
@@ -301,11 +296,17 @@
    "fieldtype": "Select",
    "label": "Schedule Interval",
    "options": "Daily\nWeekly\nMonthly\nYearly"
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Data",
+   "label": "Recipient",
+   "options": "Phone"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-25 02:44:12.903636",
+ "modified": "2025-04-26 11:18:58.858826",
  "modified_by": "Administrator",
  "module": "WhatsApp",
  "name": "WA Automation Rule",

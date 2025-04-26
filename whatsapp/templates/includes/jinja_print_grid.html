@@ -7,15 +7,40 @@
 <p>{{ subtitle }}</p>
 <hr>
 {% endif %}
+<style>
+	table.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent;
+		border-collapse: collapse;
+	}
+	.table-bordered {
+		border: 1px solid #dee2e6;
+	}
+	.table-bordered th,
+	.table-bordered td {
+		border: 1px solid #dee2e6;
+		padding: 8px;
+		vertical-align: top;
+	}
+	th {
+		background-color: #f9f9f9;
+	}
+</style>
 
 <table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>#</th>
 			{% for col in columns %}
-				{% if col.name and col._id != "_check" %}
-					<th {% if col.minWidth %} style="min-width: {{ col.minWidth }}px" {% endif %}>
-						{{ _(col.name) }}
+				{% if col.label %}
+					<th
+						{% if col.width %}
+							style="min-width: {{ col.width }}px"
+						{% endif %}
+					>
+						{{ _(col.label) }}
 					</th>
 				{% endif %}
 			{% endfor %}
@@ -23,17 +48,24 @@
 	</thead>
 	<tbody>
 		{% for row in data %}
-			<tr>
-				<td {% if row.bold %} style="font-weight: bold" {% endif %}>{{ loop.index }}</td>
+			<tr style="height: 30px;">
+				<td {% if row.bold %} style="font-weight: bold;" {% endif %}>
+					{{ loop.index }}
+				</td>
 				{% for col in columns %}
-					{% if col.name and col._id != "_check" %}
-						{% set value = row[col.fieldname] if col.fieldname else row[col.id] %}
-						<td {% if row.bold %} style="font-weight: bold" {% endif %}>
-							{% if row.is_total_row and loop.index0 == 0 %}
-								{{ _("Total") }}
-							{% else %}
-								{{ value }}
-							{% endif %}
+					{% if col.label %}
+						{% set value = row.get(col.fieldname) %}
+						<td
+							{% if row.bold %} style="font-weight: bold;" {% endif %}
+							{% if value and value|string|length > 45 %} class="overflow-wrap-anywhere" {% endif %}
+						>
+							<span>
+								{% if row.is_total_row and loop.index0 == 0 %}
+									{{ _("Total") }}
+								{% else %}
+									{{ value }}
+								{% endif %}
+							</span>
 						</td>
 					{% endif %}
 				{% endfor %}

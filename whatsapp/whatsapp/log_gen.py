@@ -232,11 +232,12 @@ def process_scheduled_rule():
                 "enabled": 1,
                 "scheduled": 1
         }, fields=['*'])
-
+        # print("here")
         for rule in rules:
+                # print(f"rule{rule}")
                 if should_run(rule):
+                        # print("should_run")
                         module = frappe.get_meta(rule.document_type).module
-                        print(f"rule{rule}")
 
 
                         doc = frappe.get_single("WA Setting") 
@@ -248,7 +249,7 @@ def process_scheduled_rule():
                         
                         if not account:
                                 frappe.throw(f"Account is not set for module {module} in WA Setting")
-                        print("should run")
+                        # print("should run")
                         #generate pdf
                         report = frappe.get_doc("Report", rule.report_ref)
                         columns, data = report.get_data(
@@ -257,6 +258,7 @@ def process_scheduled_rule():
                         as_dict=True,
                         ignore_prepared_report=True
                                 )
+                        # print(f"columns{columns}")
                         grid_html = frappe.render_template("whatsapp/templates/includes/jinja_print_grid.html", {
                                 "title": report.name,
                                 "subtitle": "",
@@ -285,10 +287,10 @@ def process_scheduled_rule():
 
                         # print(f"hrml{wrapper_html}")
                         # pdf_content = frappe.utils.pdf.get_pdf(html)
-                        print("PDF length:", len(pdf_content))
+                        # print("PDF length:", len(pdf_content))
 
                         # save as File doc
-                        print("no error")
+                        # print("no error")
                         file_doc = frappe.get_doc({
                         "doctype": "File",
                         "file_name": f"Reportt-{frappe.utils.now_datetime()}.pdf",
@@ -296,13 +298,22 @@ def process_scheduled_rule():
                         "content": pdf_content
                         })
                         file_doc.save(ignore_permissions=True)
-                        print(f"file_doc{file_doc}")
+                        # print(f"file_doc{file_doc}")
 
                         if file_doc:
-                                log_created=generate_log(account,rule.recipient,"Send Attach",rule.document_type,doc,"Direct","",file_doc.file_url)
+                                log_created=generate_log(account,rule.recipient,"Send Attach","WA Automation Rule",rule.name,"Direct","",file_doc.file_url)
                                 if log_created:
                                         print("created")
-                                #         frappe.db.set_value("WA Automation Rule", rule.name, "last_run", now_datetime())
+                                        frappe.db.commit()
+
+                                        # safe update using SQL directly
+                                        frappe.db.sql("""
+                                                UPDATE `tabWA Automation Rule`
+                                                SET last_run = %s
+                                                WHERE name = %s
+                                        """, (now_datetime(), rule.name))
+                                        
+                                        frappe.db.commit()
                         #         print("file_doc")
                         # file_doc = frappe.get_doc({
                         # "doctype": "File",
@@ -313,7 +324,40 @@ def process_scheduled_rule():
 
                         #save it as file_doc
                        
+
+from frappe.utils import now
+
+@frappe.whitelist()
+def method_name():
+        process_scheduled_rule()
+        print("here")
+
         
+        # doc=frappe.get_doc(
+        #                 {
+        #                         "doctype": "WA Log",
+                        
+        #                         "sender": "WA-ACC-012",
+        #                         "receiver_id": "444444",
+        #                         "type": "Send Message",
+        #                         "ref_doctype": "Item",
+        #                         "ref_document": "test4",
+                        
+                                
+        #                         "status":"Queued",
+        #                         "channel_type":"Direct",
+        #                         # "file_reference":url,
+        #                         # "content":content
+        #                         # "group_id":self.group_id
+
+                                
+        #                 }
+        #         ).insert() 
+        # print(f"here{doc}")
+        # frappe.db.commit()
+    
+        # frappe.logger().info(f"🔔 My scheduler task ran at {now()}")
+
 def should_run(rule):
         last_run = rule.get("last_run")
         now = now_datetime()
