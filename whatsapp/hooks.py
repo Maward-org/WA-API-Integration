@@ -170,7 +170,7 @@ doc_events = {
 scheduler_events = {
     "cron": {
         "* * * * *": [
-            "whatsapp.whatsapp.log_gen.method_name"
+            "whatsapp.whatsapp.log_gen.process_scheduled_rule"
         ]
     }
 }
@@ -269,4 +269,3 @@ scheduler_events = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
