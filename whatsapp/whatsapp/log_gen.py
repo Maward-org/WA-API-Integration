@@ -9,10 +9,17 @@ from frappe.utils.pdf import get_pdf
 def apply(doc, state):
     """DocEvent hook used to trigger WA Automation Rule on document change."""
 
+    session_user = getattr(getattr(frappe, "session", None), "user", None)
+    if not session_user or session_user == "Guest":
+        return
+
     # أثناء install / migrate / patch لا تشغّل أي منطق إضافي
     if getattr(frappe.flags, "in_migrate", False) or getattr(
         frappe.flags, "in_patch", False
     ) or getattr(frappe.flags, "in_install", False):
+        return
+
+    if doc.doctype in {"FC Message", "FC Conversation", "Error Log"}:
         return
 
     # لو DocType نفسه لسه ما نزل من JSON للـ DB لا تعمل شيء
@@ -20,7 +27,7 @@ def apply(doc, state):
         return
 
     try:
-        rules = frappe.get_list(
+        rules = frappe.get_all(
             "WA Automation Rule",
             filters={"enabled": 1, "document_type": doc.doctype},
             pluck="name",
